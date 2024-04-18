@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KITE</title>
+    <style>
+        :root {
+            --main-bg-color: #424242;
+        }
+        html, body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: var(--main-bg-color);
+        }
+        #content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 5px;
+            height: 100vh;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            box-sizing: border-box;
+            overflow: scroll;
+        }
+
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;   
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+</body>
+<script type="text/javascript">
+    const content = document.getElementById('content');
+    const links = [
+        'http://127.0.0.1:51488/d/e1RXnCbVz/kubernetes-dashboard?orgId=1&refresh=5s&kiosk', // 18283
+        'http://127.0.0.1:51488/d/4XuMd2Iiz/kubernetes-cluster-prometheus?orgId=1&refresh=5s&kiosk',
+        'https://www.example.com',
+    ];
+
+    links.forEach(link => {
+        const iframe = document.createElement('iframe');
+
+        // Custom attributes
+        iframe.src = link;
+        iframe.loading = 'lazy';
+        iframe.classList.add('iframe');
+
+        content.appendChild(iframe);
+    });
+
+    // add overlay to register click event for fullscreen
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    overlay.addEventListener('click', () => {
+        content.requestFullscreen().then(() => {
+            overlay.remove();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    });
+    content.appendChild(overlay);
+
+    // add overlay on exit fullscreen
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+            content.appendChild(overlay);
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,41 @@
+# Grafana values file
+
+# Disable x-frame-options header
+grafana.ini:
+  auth.anonymous:
+    enabled: true
+    org_name: Main Org.
+    org_role: Viewer
+  security:
+    allow_embedding: true
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      # Minikube prometheus service
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server:80
+        access: proxy
+        isDefault: true
+
+dashboards:
+  default:
+    some-dashboard:
+      gnetId: 6417
+      revision: 1
+      datasource: Prometheus
+  
+# dashboardProviders:
+#   dashboardproviders.yaml:
+#     apiVersion: 1
+#     providers:
+#       - name: 'default'
+#         orgId: 1
+#         folder: ''
+#         type: file
+#         disableDeletion: false
+#         editable: true
+#         options:
+#           path: /var/lib/grafana/dashboards/default
