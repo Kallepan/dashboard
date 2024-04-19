@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-exceeds-quota
+spec:
+  containers:
+  - name: pod-exceeds-quota
+    image: nginx
+    resources:
+      requests:
+        cpu: 2
+        memory: 2Gi
+      limits:
+        cpu: 2
+        memory: 2Gi

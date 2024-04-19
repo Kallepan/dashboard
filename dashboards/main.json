@@ -38,6 +38,204 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Usage %",
+            "axisPlacement": "auto",
+            "axisSoftMax": 100,
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 16,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 49,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum(rate(container_cpu_usage_seconds_total[1m])) by (namespace) \n/ \nclamp_min(sum(kube_resourcequota{resourcequota=\"compute-resources\", type=\"hard\", resource=\"limits.cpu\"}) by (namespace), 1)\n* \n100",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "CPU of total resource quota",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Usage %",
+            "axisPlacement": "auto",
+            "axisSoftMax": 100,
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 50,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "(sum(container_memory_usage_bytes) by (namespace))\n/ \nclamp_min(sum(kube_resourcequota{resourcequota=\"compute-resources\", type=\"hard\", resource=\"limits.memory\"}) by (namespace), 1)\n* \n100",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Memory usage of total resource quota",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "continuous-GrYlRd"
           },
           "mappings": [],
@@ -64,7 +262,7 @@
         "h": 8,
         "w": 6,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 35,
       "options": {
@@ -163,7 +361,7 @@
         "h": 8,
         "w": 6,
         "x": 6,
-        "y": 0
+        "y": 8
       },
       "id": 37,
       "options": {
@@ -253,7 +451,7 @@
         "h": 4,
         "w": 2,
         "x": 12,
-        "y": 0
+        "y": 8
       },
       "id": 39,
       "options": {
@@ -318,7 +516,7 @@
         "h": 8,
         "w": 10,
         "x": 14,
-        "y": 0
+        "y": 8
       },
       "id": 24,
       "options": {
@@ -388,7 +586,7 @@
         "h": 4,
         "w": 2,
         "x": 12,
-        "y": 4
+        "y": 12
       },
       "id": 41,
       "options": {
@@ -450,7 +648,7 @@
         "h": 4,
         "w": 6,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 10,
       "options": {
@@ -551,7 +749,7 @@
         "h": 4,
         "w": 6,
         "x": 6,
-        "y": 8
+        "y": 16
       },
       "id": 12,
       "options": {
@@ -651,7 +849,7 @@
         "h": 4,
         "w": 2,
         "x": 12,
-        "y": 8
+        "y": 16
       },
       "id": 43,
       "options": {
@@ -721,7 +919,7 @@
         "h": 4,
         "w": 5,
         "x": 14,
-        "y": 8
+        "y": 16
       },
       "id": 2,
       "options": {
@@ -797,7 +995,7 @@
         "h": 4,
         "w": 5,
         "x": 19,
-        "y": 8
+        "y": 16
       },
       "id": 4,
       "options": {
@@ -900,7 +1098,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 12
+        "y": 20
       },
       "id": 18,
       "options": {
@@ -1013,7 +1211,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 12
+        "y": 20
       },
       "id": 20,
       "interval": "1m",
@@ -1056,7 +1254,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 29
       },
       "id": 6,
       "panels": [],
@@ -1127,7 +1325,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 22
+        "y": 30
       },
       "id": 16,
       "options": {
@@ -1228,7 +1426,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 22
+        "y": 30
       },
       "id": 22,
       "options": {
@@ -1328,7 +1526,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 30
+        "y": 38
       },
       "id": 45,
       "options": {
@@ -1424,7 +1622,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 30
+        "y": 38
       },
       "id": 48,
       "options": {
@@ -1521,7 +1719,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 38
+        "y": 46
       },
       "id": 26,
       "interval": "1m",
@@ -1602,7 +1800,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1618,7 +1817,7 @@
         "h": 11,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 56
       },
       "id": 27,
       "options": {
@@ -1697,7 +1896,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1713,7 +1913,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 59
+        "y": 67
       },
       "id": 29,
       "options": {
@@ -1797,7 +1997,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1813,7 +2014,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 75
       },
       "id": 30,
       "options": {
@@ -1895,7 +2096,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1911,7 +2113,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 76
+        "y": 84
       },
       "id": 32,
       "options": {
@@ -1998,7 +2200,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2039,7 +2242,7 @@
         "h": 9,
         "w": 24,
         "x": 0,
-        "y": 84
+        "y": 92
       },
       "id": 33,
       "options": {
@@ -2179,13 +2382,13 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Kubernetes Dashboard",
   "uid": "e1RXnCbVz",
-  "version": 2,
+  "version": 6,
   "weekStart": ""
 }
